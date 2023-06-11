@@ -1,16 +1,17 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from util.singleton import singleton
+import os
 
 @singleton
 class EventRepository:
     def __init__(self):
-        self.database = "gather_test"
-        self.host = "localhost"
-        self.user = "db_user"
-        self.password = "db_pass"
-        self.port = "5433"
-        self.connection_string = f"postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.database}"
+        self.database = os.environ.get('DATABASE_NAME')
+        self.url = os.environ.get('DATABASE_ENDPOINT')
+        self.user = os.environ.get('DATABASE_USER')
+        self.password = os.environ.get('DATABASE_PASSWORD')
+
+        self.connection_string = f"postgresql://{self.user}:{self.password}@{self.url}/{self.database}"
 
     def getMusicalEventRatesUser(self, user_id):
         engine = create_engine(self.connection_string)

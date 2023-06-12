@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split,cross_val_score,KFold
 from repository.event_repository import EventRepository
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-from flask import jsonify
 import json
 
 def crossValidate():

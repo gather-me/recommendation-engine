@@ -6,10 +6,10 @@ import os
 @singleton
 class EventRepository:
     def __init__(self):
-        self.database = os.environ.get('DATABASE_NAME', 'gather_test')
-        self.url = os.environ.get('DATABASE_ENDPOINT', 'localhost:5433')
-        self.user = os.environ.get('DATABASE_USER', 'db_user')
-        self.password = os.environ.get('DATABASE_PASSWORD', 'db_pass')
+        self.database = os.environ.get('DATABASE_NAME')
+        self.url = os.environ.get('DATABASE_ENDPOINT')
+        self.user = os.environ.get('DATABASE_USER')
+        self.password = os.environ.get('DATABASE_PASSWORD')
 
         self.connection_string = f"postgresql://{self.user}:{self.password}@{self.url}/{self.database}"
 
@@ -27,8 +27,7 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
-
+        data_frame = pd.read_sql(query, engine, params=(user_id,))
         return data_frame
 
     def getSportEventRatesUser(self, user_id):
@@ -45,8 +44,7 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
-
+        data_frame = pd.read_sql(query, engine, params=(user_id,))
         return data_frame
     def getNatureEventRatesUser(self, user_id):
         engine = create_engine(self.connection_string)
@@ -62,8 +60,7 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
-
+        data_frame = pd.read_sql(query, engine, params=(user_id,))
         return data_frame
     def getStagePlayEventRatesUser(self, user_id):
         engine = create_engine(self.connection_string)
@@ -79,8 +76,7 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
-
+        data_frame = pd.read_sql(query, engine, params=(user_id,))
         return data_frame
 
     def getMusicalEventRates(self):

@@ -27,7 +27,8 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,))
+        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
+
         return data_frame
 
     def getSportEventRatesUser(self, user_id):
@@ -44,7 +45,8 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,))
+        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
+
         return data_frame
     def getNatureEventRatesUser(self, user_id):
         engine = create_engine(self.connection_string)
@@ -60,7 +62,8 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,))
+        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
+
         return data_frame
     def getStagePlayEventRatesUser(self, user_id):
         engine = create_engine(self.connection_string)
@@ -76,7 +79,8 @@ class EventRepository:
                 WHERE user_id in (%s)
                 ORDER BY random();
                 """
-        data_frame = pd.read_sql(query, engine, params=(user_id,))
+        data_frame = pd.read_sql(query, engine, params=(user_id,), schema=None)
+
         return data_frame
 
     def getMusicalEventRates(self):

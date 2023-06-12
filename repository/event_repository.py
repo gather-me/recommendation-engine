@@ -6,16 +6,11 @@ import os
 @singleton
 class EventRepository:
     def __init__(self):
-        self.database = os.environ.get('DATABASE_NAME')
-        self.url = os.environ.get('DATABASE_ENDPOINT')
-        self.user = os.environ.get('DATABASE_USER')
-        self.password = os.environ.get('DATABASE_PASSWORD')
+        self.database = os.environ['DATABASE_NAME']
+        self.url = os.environ['DATABASE_ENDPOINT']
+        self.user = os.environ['DATABASE_USER']
+        self.password = os.environ['DATABASE_PASSWORD']
 
-        print(self.database)
-        print(self.url)
-        print(self.user)
-        print(self.password)
-        
         self.connection_string = f"postgresql://{self.user}:{self.password}@{self.url}/{self.database}"
 
     def getMusicalEventRatesUser(self, user_id):

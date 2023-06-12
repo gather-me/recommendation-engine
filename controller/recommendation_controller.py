@@ -8,11 +8,9 @@ app = Flask(__name__)
 def cross_validate():
     return crossValidate()
 
-
 @app.route("/events/<event_type>/predict/rate/<int:user_id>")
 def single_recommendation(event_type, user_id):
     return make_recommendation(event_type, user_id)
-
 
 @app.route("/events/<event_type>/predict/rate")
 def group_recommendation(event_type):

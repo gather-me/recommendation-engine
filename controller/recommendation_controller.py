@@ -1,8 +1,13 @@
 from flask import Flask, request
 from service.group_recommendation import make_group_recommendation
 from service.single_recommendation import make_recommendation
-from service.collaborative_filtering import crossValidate
+from service.content_based import crossValidate
 app = Flask(__name__)
+
+@app.route("/cross-validation")
+def cross_validate():
+    return crossValidate()
+
 
 @app.route("/events/<event_type>/predict/rate/<int:user_id>")
 def single_recommendation(event_type, user_id):

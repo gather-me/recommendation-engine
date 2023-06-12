@@ -6,7 +6,7 @@ from repository.event_repository import EventRepository
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from flask import jsonify
-
+import json
 
 def crossValidate():
     dataset = EventRepository().getMusicalEventRates()
@@ -18,7 +18,7 @@ def crossValidate():
     X_train, X_test, y_train, y_test = train_test_split(dataset, y, test_size=0.2, random_state=42)
 
     models = []
-    models.append(('LR', LogisticRegression(max_iter=3000)))
+    models.append(('LR', LogisticRegression(max_iter=1500)))
     models.append(('KNN', KNeighborsClassifier()))
     models.append(('RF', RandomForestClassifier()))
     models.append(('DT', DecisionTreeClassifier()))
@@ -65,7 +65,7 @@ def predictMusical(dataset):
     pred_events = pred_events.sort_values(by="prediction", ascending=False)
     json_data = pred_events.to_json(orient='records')
 
-    return jsonify(json_data)
+    return json.loads(json_data)
 
 def predictSport(dataset):
     dataset["category"] = dataset["category"].map({"Football": 0, "Basketball": 1, "Volleyball": 2, "Jogging": 3})
@@ -101,7 +101,7 @@ def predictSport(dataset):
     pred_events = pred_events.sort_values(by="prediction", ascending=False)
     json_data = pred_events.to_json(orient='records')
 
-    return jsonify(json_data)
+    return json.loads(json_data)
 
 
 def predictNature(dataset):
@@ -138,7 +138,7 @@ def predictNature(dataset):
     pred_events = pred_events.sort_values(by="prediction", ascending=False)
     json_data = pred_events.to_json(orient='records')
 
-    return jsonify(json_data)
+    return json.loads(json_data)
 
 def predictStagePlay(dataset):
     dataset["category"] = dataset["category"].map({"Theatre": 0, "StandUp": 1})
@@ -173,4 +173,4 @@ def predictStagePlay(dataset):
     pred_events = pred_events.sort_values(by="prediction", ascending=False)
     json_data = pred_events.to_json(orient='records')
 
-    return jsonify(json_data)
+    return json.loads(json_data)
